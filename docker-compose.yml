@@ -1,0 +1,32 @@
+version: "3.8"
+
+networks:
+  public:
+
+volumes:
+  db-data: {}
+
+services:
+  mayalokam-frontend:
+    container_name: mayalokam-frontend
+    image: nginx:1.19
+    ports:
+      - 80:80
+    volumes:
+      - ./:/usr/share/nginx/html
+    networks:
+      - public
+
+  mayalokam-db:
+    container_name: mayalokam-db
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    command: "--default-authentication-plugin=mysql_native_password"
+    environment:
+      - MYSQL_ROOT_PASSWORD=ubuntu
+      - MYSQL_DATABASE=musicupload
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - public
