@@ -9,11 +9,11 @@ volumes:
 services:
   mayalokam-frontend:
     container_name: mayalokam-frontend
-    image: nginx:1.19
+    image: php:8.0-apache
     ports:
       - 80:80
     volumes:
-      - ./:/usr/share/nginx/html
+      - ./:/var/www/html
     networks:
       - public
 
