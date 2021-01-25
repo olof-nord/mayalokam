@@ -40,18 +40,18 @@ echo '<p>transfer sucessful: '. $c .' of '. $maxuploads .' files</p>';
 $urlvar=0;
 }
  ?>
-<p>Här kan du ladda upp låtar till spellistan.</p>
-<p>Filformat som stöds: <?php for ($i=0; ($extvars[$i])!=null; $i++)
+<p>HÃ¤r kan du ladda upp lÃ¥tar till spellistan.</p>
+<p>Filformat som stÃ¶ds: <?php for ($i=0; ($extvars[$i])!=null; $i++)
 {
 echo ' .';
 echo $extvars[$i];
 } ?>.</p>
-<p>Max filstorlek är <?php echo $maxsize; print_r ($e[0]); ?> Mb.</p>
+<p>Max filstorlek Ã¤r <?php echo $maxsize; print_r ($e[0]); ?> Mb.</p>
 <form name="newad" method="post" enctype="multipart/form-data"  action="localhost/musicupload/hidden_files/upload.php">
 <table>
      <tr><td><input type="file" name="file"></td></tr>
-     <tr><td><div class="bigbutton"><input name="Submit" type="submit" value="Submit"></td></tr></div> 
-</table>   
+     <tr><td><div class="bigbutton"><input name="Submit" type="submit" value="Submit"></td></tr></div>
+</table>
 </form>
 </body>
 </html>
