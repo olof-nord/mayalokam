@@ -47,7 +47,7 @@ echo ' .';
 echo $extvars[$i];
 } ?>.</p>
 <p>Max filstorlek är <?php echo $maxsize; print_r ($e[0]); ?> Mb.</p>
-<form name="newad" method="post" enctype="multipart/form-data"  action="localhost/musicupload/hidden_files/upload.php">
+<form name="newad" method="post" enctype="multipart/form-data"  action="upload.php">
 <table>
      <tr><td><input type="file" name="file"></td></tr>
      <tr><td><div class="bigbutton"><input name="Submit" type="submit" value="Submit"></td></tr></div>

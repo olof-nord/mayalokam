@@ -2,16 +2,16 @@
 
 include("data/variables.php");
 //mysql server connect (aborts script if no mysql-server connection can be made)
-$con = mysql_connect("$host","$username","$password");
+$con = mysqli_connect("$host","$username","$password");
 if (!$con)
  {
-die('Could not connect: ' . mysql_error());
+die('Could not connect: ' . mysqli_error($con));
  }
  //select database
- mysql_select_db("$dbname", $con);
- 
-//This variable is used as a flag. The value is initialized with 0 (meaning no error  found)  
-//and it will be changed to 1 if an error occures.  
+ mysqli_select_db($con, "$dbname");
+
+//This variable is used as a flag. The value is initialized with 0 (meaning no error  found)
+//and it will be changed to 1 if an error occures.
 //If the error occures the file will not be uploaded.
 
 $errors=0;
@@ -21,22 +21,22 @@ $ip = getRealIpAddr(); // Get the visitor's IP
 
 
 //checks if the ip don't exists in the table and adds it
-if(!mysql_num_rows(mysql_query("SELECT ipadress FROM $tblname WHERE ipadress = '$ip'")))
+if(!mysqli_num_rows(mysqli_query($con, "SELECT ipadress FROM $tblname WHERE ipadress = '$ip'")))
 {
 $sql="INSERT INTO music (ipadress)
 VALUES ('$ip')";
 
-if (!mysql_query($sql,$con))
+if (!mysqli_query($con, $sql))
  {
  $errors=1;
- die('Error: ' . mysql_error());
+ die('Error: ' . mysqli_error($con));
  }
 
 }
 
 
 //checks counter in table if <$maxuploads
-if(!mysql_num_rows(mysql_query("SELECT * FROM music WHERE ipadress = '$ip' && counter<$maxuploads")))
+if(!mysqli_num_rows(mysqli_query($con, "SELECT * FROM music WHERE ipadress = '$ip' && counter<$maxuploads")))
 {
 $errors=1;
 header("location: $mainsite?err=1");
@@ -67,8 +67,8 @@ if(isset($_POST['Submit']))
      //get the extension of the file in a lower case format
          $extension = getExtension($filename);
          $extension = strtolower($extension);
-     //if it is not a known extension, we will suppose it is an error and will not  upload the file,  
-//if (($extension != "mp3") && ($extension != "m4a") && ($extension != "ogg") && ($extension != "mid") && ($extension != "wma") && ($extension != "midi") && ($extension != "xm") && ($extension != "mod") && ($extension != "swf") && ($extension != "flv") && ($extension != "mp4") && ($extension != "mkv") && ($extension != "avi") && ($extension != "ape"))  
+     //if it is not a known extension, we will suppose it is an error and will not  upload the file,
+//if (($extension != "mp3") && ($extension != "m4a") && ($extension != "ogg") && ($extension != "mid") && ($extension != "wma") && ($extension != "midi") && ($extension != "xm") && ($extension != "mod") && ($extension != "swf") && ($extension != "flv") && ($extension != "mp4") && ($extension != "mkv") && ($extension != "avi") && ($extension != "ape"))
 if (!in_array($extension,$extvars))
 {
 $errors=1;
@@ -114,15 +114,15 @@ if(isset($_POST['Submit']) && !$errors)
 {
 
 //add "1" to counter
-$result = mysql_query("SELECT * FROM music WHERE ipadress = '$ip'");
+$result = mysqli_query($con, "SELECT * FROM music WHERE ipadress = '$ip'");
 
-while($row = mysql_fetch_array($result))
+while($row = mysqli_fetch_array($result))
  {
  $plus = 1 + $row['counter'];
- mysql_query("UPDATE music SET counter = '$plus' WHERE ipadress = '$ip'");
+ mysqli_query($con, "UPDATE music SET counter = '$plus' WHERE ipadress = '$ip'");
  }
 
-header("location: $mainsite?err=6&c=$plus");   
+header("location: $mainsite?err=6&c=$plus");
 }
 else
 
@@ -131,10 +131,10 @@ else
 
 
 //closes the mysql connection
-mysql_close($con);
+mysqli_close($con);
 
 
-	  
+
 //functions
 //gets client ip-adress and stores it on variable "$ip", will probably also work if behind a proxy
 function getRealIpAddr() {

@@ -1,6 +1,6 @@
 <?php
 $extvars = array("mp3", "m4a", "ogg", "mid", "midi", "wma", "xm", "mod", "swf", "flv", "mp4", "mkv", "avi", "ape");
-$host="localhost";
+$host="mayalokam-db";
 $username="root";
 $password="ubuntu";
 $dbname="musicupload";

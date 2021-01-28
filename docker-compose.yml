@@ -9,7 +9,8 @@ volumes:
 services:
   mayalokam-frontend:
     container_name: mayalokam-frontend
-    image: php:8.0-apache
+    image: php:7.4-apache
+    command: "/bin/sh -c 'docker-php-ext-install mysqli && exec apache2-foreground'"
     ports:
       - 80:80
     volumes:
