@@ -8,6 +8,20 @@ The initial setup was ran with a Windows server 2003 with the [XAMPP](https://en
 
 For easier use, the whole setup is now also dockerized and can be started locally with `docker-compose up`.
 
+<p align="center">
+  <kbd>
+    <img src="https://github.com/olof-nord/mayalokam/raw/master/screenshot.png" alt="Screenshot of website"/>
+  </kbd>
+</p>
+
+## Features
+
+* Configurable max number of uploads per IP
+* Configurable max file size
+* Configurable allowed file extensions
+
+To specify configuration, see [variables.php](data/variables.php).
+
 ## Addresses
 
 To access the file upload page
