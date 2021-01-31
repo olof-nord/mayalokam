@@ -8,6 +8,6 @@ $tblname="music";
  //sets max amount of files to be uploaded from the same ip
 $maxuploads=22;
 //define a maximum size for the uploaded files in Mb
-$maxsize=1;
-$mainsite="localhost/musicupload/form.php"
+$maxsize=10;
+$mainsite="http://localhost/form.php"
 ?>
