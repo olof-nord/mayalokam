@@ -34,3 +34,13 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - public
+
+  mayalokam-phpmyadmin:
+    container_name: mayalokam-phpmyadmin
+    image: phpmyadmin/phpmyadmin:5.0
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=mayalokam-db
+    networks:
+      - public
